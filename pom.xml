@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modules>
+        <module>entity</module>
+        <module>repository</module>
+        <module>service</module>
+        <module>security</module>
+        <module>controller</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.6</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>by.iba</groupId>
+    <artifactId>springboot-multimodule-app</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>springboot-multimodule-app</name>
+    <description>springboot-multimodule-app</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <org.projectlombok.version>1.18.2</org.projectlombok.version>
+        <org.apache.maven.plugins.version>3.5.1</org.apache.maven.plugins.version>
+        <org.modelmapper.version>3.1.0</org.modelmapper.version>
+        <by.iba.version>1.0.0</by.iba.version>
+        <jsonwebtoken.version>0.9.1</jsonwebtoken.version>
+        <org.postgresql.version>42.3.3</org.postgresql.version>
+        <start-class>com.example.application.SpringbootMultimoduleApplication</start-class>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>by.iba</groupId>
+                <artifactId>entity</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>by.iba</groupId>
+                <artifactId>repository</artifactId>
+                <version>${by.iba.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>by.iba</groupId>
+                <artifactId>service</artifactId>
+                <version>${by.iba.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>by.iba</groupId>
+                <artifactId>security</artifactId>
+                <version>${by.iba.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${org.postgresql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${org.modelmapper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jsonwebtoken.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${org.projectlombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.6.4</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
