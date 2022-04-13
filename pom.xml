@@ -33,7 +33,7 @@
         <by.iba.version>1.0.0</by.iba.version>
         <jsonwebtoken.version>0.9.1</jsonwebtoken.version>
         <org.postgresql.version>42.3.3</org.postgresql.version>
-        <start-class>com.example.application.SpringbootMultimoduleApplication</start-class>
+        <start-class>by.iba.application.SpringbootMultimoduleApplication</start-class>
     </properties>
 
     <dependencyManagement>
