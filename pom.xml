@@ -3,11 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modules>
-        <module>entity</module>
-        <module>repository</module>
-        <module>service</module>
-        <module>security</module>
-        <module>controller</module>
+        <module>backend/entity</module>
+        <module>backend/repository</module>
+        <module>backend/security</module>
+        <module>backend/service</module>
+        <module>backend/controller</module>
+        <module>frontend</module>
+        <module>backend</module>
     </modules>
 
     <parent>
@@ -41,7 +43,7 @@
             <dependency>
                 <groupId>by.iba</groupId>
                 <artifactId>entity</artifactId>
-                <version>1.0.0</version>
+                <version>${by.iba.version}</version>
             </dependency>
             <dependency>
                 <groupId>by.iba</groupId>

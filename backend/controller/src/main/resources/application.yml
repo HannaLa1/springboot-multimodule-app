@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+    url: jdbc:postgresql://dbpostgres:5432/multimodule_project
+    username: multimodule_project_app
+    password: anna123
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+jwt:
+  token:
+    secret: jwtappsecretkey
+    expired: 3600000
