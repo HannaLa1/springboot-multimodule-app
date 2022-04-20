@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import './Login.css';
+import './SignIn.css';
 
-import {Form, notification} from 'antd';
-import welcomePicture from '../../img/roger-bradshaw-Yd1IJocQdHo-unsplash.jpg';
+import {notification} from 'antd';
 import {localizedStrings} from "../../util/Localization";
-import LoginForm from "./LoginForm";
+import SignInForm from "./SignInForm";
 
 
-class Login extends Component {
+class SignIn extends Component {
 
     componentDidMount() {
         if (this.props.location.state && this.props.location.state.error) {
@@ -40,11 +39,8 @@ class Login extends Component {
                 </h1>
                 <div className="login-container">
                     <div className="login-content">
-                        <LoginForm onLogin={this.props.onLogin}/>
+                        <SignInForm onLogin={this.props.onLogin}/>
                     </div>
-                </div>
-                <div className="welcome-picture">
-                    <img src={welcomePicture} width="600px" height="500px " alt={"welcome"}/>
                 </div>
             </div>
         );
@@ -52,4 +48,4 @@ class Login extends Component {
 }
 
 
-export default Login;
+export default SignIn;

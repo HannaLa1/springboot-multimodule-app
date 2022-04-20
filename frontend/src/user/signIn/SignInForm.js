@@ -5,13 +5,12 @@ import {Button, Form, Input, notification, Tooltip} from "antd";
 import {localizedStrings} from "../../util/Localization";
 import {Link} from "react-router-dom";
 import FormItem from "antd/es/form/FormItem";
-import SocialLogin from "./SocialLogin";
 
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import LockOutlined from "@ant-design/icons/lib/icons/LockOutlined";
 
 
-class LoginForm extends Component {
+class SignInForm extends Component {
 
     state = {
         email: '',
@@ -109,4 +108,4 @@ class LoginForm extends Component {
 }
 
 
-export default LoginForm;
+export default SignInForm;

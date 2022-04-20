@@ -28,7 +28,7 @@ const request = (options) => {
 
 export function login(loginRequest) {
     return request({
-        url: API_BASE_URL + "/auth/login",
+        url: API_BASE_URL + "/api/v1/users/auth/signIn",
         method: 'POST',
         body: JSON.stringify(loginRequest)
     });
@@ -36,7 +36,7 @@ export function login(loginRequest) {
 
 export function signUp(signupRequest) {
     return request({
-        url: API_BASE_URL + "/auth/sign-up",
+        url: API_BASE_URL + "/api/v1/users/auth/signUp",
         method: 'POST',
         body: JSON.stringify(signupRequest)
     });
@@ -48,7 +48,7 @@ export function getCurrentUser() {
     }
 
     return request({
-        url: API_BASE_URL + "/users/me",
+        url: API_BASE_URL + "/api/v1/users/{id}",
         method: 'GET'
     });
 }

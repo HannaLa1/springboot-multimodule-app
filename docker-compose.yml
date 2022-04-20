@@ -35,7 +35,6 @@ services:
       POSTGRES_PASSWORD: anna123
     volumes:
       - ./pg-scripts:/docker-entrypoint-initdb.d
-      - ./db-scripts:/docker-entrypoint-initdb.d
     networks:
       - backend
 

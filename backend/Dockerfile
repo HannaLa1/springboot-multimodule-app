@@ -14,10 +14,11 @@ COPY entity/pom.xml ./entity
 COPY repository/pom.xml ./repository
 COPY security/pom.xml ./security
 COPY service/pom.xml ./service
+COPY pom.xml .
 COPY ../pom.xml .
 
 #resolve maven dependencies, select settings and profile
-RUN mvn clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r controller/target/
+RUN mvn clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r /controller/target/
 
 # build the app (no dependency download here)
 RUN mvn clean package  -Dmaven.test.skip

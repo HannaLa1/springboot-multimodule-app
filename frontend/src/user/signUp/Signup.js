@@ -2,32 +2,20 @@ import React, {Component} from 'react';
 import {checkEmailAvailability, signUp} from '../../util/APIUtils';
 import './Signup.css';
 import {Link} from 'react-router-dom';
-import {
-    EMAIL_MAX_LENGTH,
-    ERROR,
-    NAME_MAX_LENGTH,
-    NAME_MIN_LENGTH,
-    PASSWORD_MAX_LENGTH,
-    PASSWORD_MIN_LENGTH,
-    SUCCESS
-} from '../../constants';
+import {EMAIL_MAX_LENGTH, ERROR, PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH, SUCCESS} from '../../constants';
 
 import {Button, Form, Input, notification, Upload} from 'antd';
 import {localizedStrings} from "../../util/Localization";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import FormItemLabel from "antd/es/form/FormItemLabel";
-import {beforeUpload, getBase64} from "../../util/PictureLoaderUtil";
 import LoadingOutlined from "@ant-design/icons/lib/icons/LoadingOutlined";
 import {InboxOutlined} from "@ant-design/icons";
 
 const FormItem = Form.Item;
-const {Dragger} = Upload;
 
 class Signup extends Component {
 
     state = {
         loading: false,
-        imageUrl: '',
         name: {
             value: ''
         },
@@ -73,7 +61,7 @@ class Signup extends Component {
                     message: localizedStrings.alertAppName,
                     description: localizedStrings.alertSuccessRegister,
                 });
-                this.props.history.push("/login");
+                this.props.history.push("/signIn");
             }).catch(error => {
             notification.error({
                 message: localizedStrings.alertAppName,
@@ -117,26 +105,6 @@ class Signup extends Component {
 
                 <Form {...layout}
                       onFinish={this.handleSubmit}>
-
-                    <div className="aside-picture">
-                        <Dragger
-                            name="file"
-                            listType="picture"
-                            showUploadList={false}
-                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                            beforeUpload={beforeUpload}
-                            onChange={this.handleUploadImage}>
-
-                            {this.state.imageUrl ?
-                                <img src={this.state.imageUrl} alt="avatar" style={{width: '100%'}}/> :
-                                uploadButton
-                            }
-
-                            <p className="ant-upload-text">
-                                Нажмите для выбора картинки
-                            </p>
-                        </Dragger>
-                    </div>
 
                     <div className="content-container">
 
@@ -204,7 +172,7 @@ class Signup extends Component {
                             <br/>
                             {localizedStrings.alreadyRegister}
                             <Link
-                                to="/login">{localizedStrings.signUpFromLoginNow}
+                                to="/signIn">{localizedStrings.signUpFromLoginNow}
                             </Link>
                         </FormItem>
                     </div>
@@ -212,43 +180,6 @@ class Signup extends Component {
             </div>
         );
     }
-
-
-    handleUploadImage = image => {
-        if (image.file.status === 'uploading') {
-            this.setState({
-                loading: true
-            });
-            return;
-        }
-        if (image.file.status === 'done') {
-            getBase64(image.file.originFileObj, imageUrl =>
-                this.setState({
-                    imageUrl: imageUrl,
-                    loading: false,
-                }),
-            );
-        }
-    };
-
-    validateName = (name) => {
-        if (name.length < NAME_MIN_LENGTH) {
-            return {
-                validateStatus: ERROR,
-                errorMsg: localizedStrings.alertBadCertificateNameTooShort
-            }
-        } else if (name.length > NAME_MAX_LENGTH) {
-            return {
-                validationStatus: ERROR,
-                errorMsg: localizedStrings.alertBadCertificateNameTooLong
-            }
-        } else {
-            return {
-                validateStatus: SUCCESS,
-                errorMsg: null,
-            };
-        }
-    };
 
     validateEmail = (email) => {
         if (!email) {
@@ -258,7 +189,7 @@ class Signup extends Component {
             }
         }
 
-        const EMAIL_REGEX = RegExp('[^@ ]+@[^@ ]+\\.[^@ ]+');
+        const EMAIL_REGEX = RegExp('^[a-z](\\.?\\w)*@[a-z]+(\\.[a-z]+)+');
         if (!EMAIL_REGEX.test(email)) {
             return {
                 validateStatus: ERROR,
@@ -269,7 +200,7 @@ class Signup extends Component {
         if (email.length > EMAIL_MAX_LENGTH) {
             return {
                 validateStatus: ERROR,
-                errorMsg: "Мыло слишком длинное!"
+                errorMsg: "Email too long!"
             }
         }
 

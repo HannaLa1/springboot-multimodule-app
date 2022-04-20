@@ -3,15 +3,13 @@ import './App.css';
 import {Route, Switch, withRouter} from 'react-router-dom';
 
 import {getCurrentUser} from '../util/APIUtils';
-import {ACCESS_TOKEN, LANGUAGE, SUCCESS, USER_ID} from '../constants';
+import {ACCESS_TOKEN, SUCCESS, USER_ID} from '../constants';
 
-import Login from '../user/login/Login';
-import SignUp from '../user/signup/Signup';
-import AppHeader from '../common/header/AppHeader';
+import SignIn from '../user/signIn/SignIn';
+import SignUp from '../user/signUp/Signup';
 import NotFound from '../common/error/NotFound';
 
 import {Layout, notification} from 'antd';
-import AppFooter from "../common/footer/AppFooter";
 
 
 import {localizedStrings} from "../util/Localization";
@@ -30,13 +28,11 @@ class App extends Component {
 
             isLoading: false,
 
-            language: localStorage.getItem(LANGUAGE) === null ? 'en' : localStorage.getItem(LANGUAGE)
         };
 
         this.handleLogout = this.handleLogout.bind(this);
         this.loadCurrentUser = this.loadCurrentUser.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
-        this.handleLanguageChange = this.handleLanguageChange.bind(this);
         this.handleNoPermissions = this.handleNoPermissions.bind(this);
 
         notification.config({
@@ -44,15 +40,6 @@ class App extends Component {
             top: 70,
             duration: 5,
         });
-    }
-
-
-    handleLanguageChange(lang) {
-        localStorage.setItem(LANGUAGE, lang);
-        this.setState(() => ({
-            language: lang
-        }));
-        localizedStrings.setLanguage(this.state.language);
     }
 
 
@@ -129,26 +116,16 @@ class App extends Component {
 
                 <AppHeader isAuthenticated={this.state.isAuthenticated}
                            currentUser={this.state.currentUser}
-                           onLogout={this.handleLogout}
-                           language={this.state.language}
-                           handleLanguageChange={this.handleLanguageChange}/>
+                           onLogout={this.handleLogout}/>
 
                 <Content className="app-content">
                     <div className="base-container">
                         <Switch>
 
-
-                            <Route exact path="/"
-                                   render={(props) =>
-                                       <ProductList isAuthenticated={this.state.isAuthenticated}
-                                                    currentUser={this.state.currentUser}
-                                                    handleLogout={this.handleLogout}
-                                                    {...props} />}/>
-
                             <Route path="/login"
                                    render={(props) =>
-                                       <Login onLogin={this.handleLogin}
-                                              {...props} />}/>
+                                       <SignIn onLogin={this.handleLogin}
+                                               {...props} />}/>
 
                             <Route path="/sign-up"
                                    render={(props) =>
