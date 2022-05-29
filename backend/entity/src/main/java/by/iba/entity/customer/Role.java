@@ -1,19 +1,19 @@
-package by.iba.entity;
+package by.iba.entity.customer;
 
+import by.iba.entity.AbstractBaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class Role extends AbstractBaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_of_role", nullable = false, unique = true)
-    private TypeOfRole typeOfRole;
+    private RoleType roleType;
 }

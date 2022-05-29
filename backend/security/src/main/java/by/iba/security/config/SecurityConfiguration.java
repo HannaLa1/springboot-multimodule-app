@@ -6,6 +6,7 @@ import by.iba.security.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,6 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
+        securedEnabled = true,
+        jsr250Enabled = true,
         prePostEnabled = true
 )
 @AllArgsConstructor
@@ -66,9 +69,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/**/*.jsx").permitAll()
                 .antMatchers("/api/v1/users/auth/**").permitAll()
                 .antMatchers("/api/v1/users/mail/**").permitAll()
-                .antMatchers("/api/v1/users/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/users/**").permitAll()
                 .antMatchers("/api/v1/admins/users/**").hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated();

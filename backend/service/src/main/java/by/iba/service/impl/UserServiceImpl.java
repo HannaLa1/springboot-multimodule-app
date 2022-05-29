@@ -3,10 +3,10 @@ package by.iba.service.impl;
 import by.iba.dto.ModificationRoleDto;
 import by.iba.dto.UpdateDto;
 import by.iba.dto.UserDto;
-import by.iba.entity.Role;
-import by.iba.entity.TypeOfRole;
-import by.iba.entity.User;
-import by.iba.entity.UserAccountStatus;
+import by.iba.entity.customer.Role;
+import by.iba.entity.customer.RoleType;
+import by.iba.entity.customer.User;
+import by.iba.entity.customer.UserAccountStatus;
 import by.iba.exception.ResourceNotFoundException;
 import by.iba.exception.ServiceException;
 import by.iba.repository.RoleRepository;
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
         user.setImageUrl(signUpReq.getImageUrl());
         user.setUserAccountStatus(UserAccountStatus.ACTIVE);
 
-        Role userRole = roleRepository.getByTypeOfRole(TypeOfRole.USER)
+        Role userRole = roleRepository.getByTypeOfRole(RoleType.USER)
                 .orElseThrow(() -> new ResourceNotFoundException("Role is not found!"));
 
         user.setRoles(Collections.singleton(userRole));

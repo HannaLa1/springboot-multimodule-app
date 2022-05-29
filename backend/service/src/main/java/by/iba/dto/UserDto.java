@@ -1,6 +1,6 @@
 package by.iba.dto;
 
-import by.iba.entity.UserAccountStatus;
+import by.iba.entity.customer.UserAccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

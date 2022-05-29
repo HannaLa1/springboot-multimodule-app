@@ -1,6 +1,6 @@
 package by.iba.dto;
 
-import by.iba.entity.customer.RoleType;
+import by.iba.entity.customer.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleDto extends AbstractDto {
+public class RatingDto extends AbstractDto {
 
-    private RoleType typeOfRole;
+    private double rating;
+
+    private User user;
 }

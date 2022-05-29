@@ -1,9 +1,7 @@
 version: "3.9"
 services:
   app-server:
-    build:
-      context: backend
-      dockerfile: Dockerfile
+    build: .
     ports:
       - "8080:8080"
     restart: always
@@ -15,8 +13,8 @@ services:
 
   app-client:
     build:
-      context: frontend
-      dockerfile: ../react-app/Dockerfile
+      context: ../react-redux-app/
+      dockerfile: ../react-redux-app/Dockerfile
     ports:
       - "3000:80"
     restart: always
@@ -31,7 +29,7 @@ services:
       - "5432:5432"
     command: postgres -c 'max_connections=500'
     environment:
-      POSTGRES_USER: multimodule_project_app
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: anna123
     volumes:
       - ./pg-scripts:/docker-entrypoint-initdb.d

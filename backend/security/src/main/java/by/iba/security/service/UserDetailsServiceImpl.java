@@ -1,8 +1,8 @@
 package by.iba.security.service;
 
-import by.iba.entity.User;
+import by.iba.entity.customer.User;
 import by.iba.repository.UserRepository;
-import by.iba.entity.UserAccountStatus;
+import by.iba.entity.customer.UserAccountStatus;
 import by.iba.security.domain.UserDetailsImpl;
 import by.iba.security.exception.BannedUserException;
 import lombok.AllArgsConstructor;

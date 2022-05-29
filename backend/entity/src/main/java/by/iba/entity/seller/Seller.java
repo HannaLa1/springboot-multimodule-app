@@ -1,5 +1,9 @@
-package by.iba.entity;
+package by.iba.entity.seller;
 
+import by.iba.entity.FullAbstractEntity;
+import by.iba.entity.car.BodyType;
+import by.iba.entity.customer.PurchaseFeedback;
+import by.iba.entity.customer.UserAccountStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,44 +12,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
-@Data
+@Table(name = "sellers")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-public class User extends FullAbstractEntity {
-
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
-
-    @Column(name = "password", nullable = false)
-    private String password;
+public class Seller extends FullAbstractEntity {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
-
-    @Column(name = "image_url")
-    private String imageUrl;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "user_id",
-                            referencedColumnName = "id"),
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "role_id",
-                            referencedColumnName = "id")
-            })
-    private Set<Role> roles = new HashSet<>();
 
     @Column(name = "recovery_token", unique = true)
     private String recoveryToken;
@@ -59,4 +44,12 @@ public class User extends FullAbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_account_status")
     private UserAccountStatus userAccountStatus;
+
+    @Column(name = "seller_rating", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    private SellerRating sellerRating;
+
+    @Column(name = "purchase_feedbacks", nullable = false)
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<PurchaseFeedback> purchaseFeedbacks = new HashSet<>();
 }

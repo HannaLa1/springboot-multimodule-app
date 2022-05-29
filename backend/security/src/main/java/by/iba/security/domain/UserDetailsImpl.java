@@ -1,7 +1,7 @@
 package by.iba.security.domain;
 
-import by.iba.entity.Role;
-import by.iba.entity.User;
+import by.iba.entity.customer.Role;
+import by.iba.entity.customer.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;

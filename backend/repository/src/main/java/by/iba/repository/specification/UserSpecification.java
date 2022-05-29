@@ -1,7 +1,7 @@
 package by.iba.repository.specification;
 
-import by.iba.entity.Role;
-import by.iba.entity.User;
+import by.iba.entity.customer.Role;
+import by.iba.entity.customer.User;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
