@@ -1,4 +1,4 @@
-package by.iba.security.dto;
+package by.iba.security.dto.resp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

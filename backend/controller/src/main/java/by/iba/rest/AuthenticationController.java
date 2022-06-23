@@ -1,46 +1,22 @@
 package by.iba.rest;
 
-import by.iba.dto.UserDto;
-import by.iba.security.dto.JwtResp;
-import by.iba.security.dto.SignInReq;
-import by.iba.security.dto.SignUpReq;
-import by.iba.service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import by.iba.dto.resp.UserDto;
+import by.iba.security.dto.resp.JwtResp;
+import by.iba.security.dto.req.SignInReq;
+import by.iba.security.dto.req.SignUpReq;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-@RestController
-@AllArgsConstructor
-@Slf4j
 @RequestMapping("/api/v1/users/auth")
-public class AuthenticationController {
-
-    private final UserService service;
+public interface AuthenticationController {
 
     @PostMapping("/signIn")
-    public ResponseEntity<JwtResp> logIn(@Valid @RequestBody SignInReq signInReq){
-
-        JwtResp resp = service.singIn(signInReq);
-
-        return new ResponseEntity<>(resp, HttpStatus.OK);
-    }
+    ResponseEntity<JwtResp> logIn(@Valid @RequestBody SignInReq signInReq);
 
     @PostMapping("/signUp")
-    public ResponseEntity<UserDto> registration(@Valid @RequestBody SignUpReq signUpReq){
-
-        UserDto resp = service.signUp(signUpReq);
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(resp.getId()).toUri());
-
-        return new ResponseEntity<>(resp, httpHeaders, HttpStatus.CREATED);
-    }
+    ResponseEntity<UserDto> registration(@Valid @RequestBody SignUpReq signUpReq);
 }

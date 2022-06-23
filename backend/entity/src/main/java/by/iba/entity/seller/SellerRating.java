@@ -1,6 +1,7 @@
 package by.iba.entity.seller;
 
 import by.iba.entity.AbstractBaseEntity;
+import by.iba.entity.customer.User;
 import lombok.*;
 
 import javax.persistence.*;

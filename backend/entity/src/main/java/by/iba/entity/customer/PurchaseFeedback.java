@@ -20,6 +20,9 @@ public class PurchaseFeedback extends AbstractBaseEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "rating", nullable = false)
+    private Integer rating;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 }

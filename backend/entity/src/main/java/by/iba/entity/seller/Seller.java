@@ -1,9 +1,10 @@
 package by.iba.entity.seller;
 
 import by.iba.entity.FullAbstractEntity;
-import by.iba.entity.car.BodyType;
 import by.iba.entity.customer.PurchaseFeedback;
-import by.iba.entity.customer.UserAccountStatus;
+import by.iba.entity.customer.AccountStatus;
+import by.iba.entity.sparepart.Image;
+import by.iba.entity.sparepart.SparePart;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,15 +42,19 @@ public class Seller extends FullAbstractEntity {
     @Column(name = "last_Visited_Date")
     private LocalDateTime lastVisitedDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_account_status")
-    private UserAccountStatus userAccountStatus;
+    @Column(name = "account_status", nullable = false)
+    @Enumerated
+    private AccountStatus accountStatus = AccountStatus.PENDING;
 
-    @Column(name = "seller_rating", nullable = false)
     @OneToOne(fetch = FetchType.LAZY)
     private SellerRating sellerRating;
 
-    @Column(name = "purchase_feedbacks", nullable = false)
     @OneToMany(fetch = FetchType.LAZY)
     private Set<PurchaseFeedback> purchaseFeedbacks = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<SparePart> spareParts = new HashSet<>();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Image image;
 }

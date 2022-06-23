@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "locations")
@@ -16,15 +18,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Location extends AbstractBaseEntity {
 
-    @Column(name = "country", nullable = false)
-    @OneToOne(fetch = FetchType.LAZY)
-    private Country country;
-
-    @Column(name = "city", nullable = false)
-    @OneToOne(fetch = FetchType.LAZY)
-    private City city;
-
-    @Column(name = "street", nullable = false)
-    @OneToOne(fetch = FetchType.LAZY)
-    private Street street;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<City> cities = new HashSet<>();
 }

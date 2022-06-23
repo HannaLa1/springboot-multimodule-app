@@ -4,4 +4,6 @@ public final class Constant {
     public static final long EXPIRE_TOKEN_AFTER_MINUTES = 30;
 
     public static final String RECOVERY_EMAIL = "ladaann166@mail.ru";
+
+    public static final String DEFAULT_IMAGE_URL = "defaultPath";
 }

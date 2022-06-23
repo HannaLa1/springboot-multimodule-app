@@ -1,20 +1,19 @@
 package by.iba.service.impl;
 
-import by.iba.dto.ModificationRoleDto;
-import by.iba.dto.UpdateDto;
-import by.iba.dto.UserDto;
+import by.iba.dto.req.ModificationRoleDto;
+import by.iba.dto.req.UpdateDto;
+import by.iba.dto.resp.UserDto;
 import by.iba.entity.customer.Role;
 import by.iba.entity.customer.RoleType;
 import by.iba.entity.customer.User;
-import by.iba.entity.customer.UserAccountStatus;
 import by.iba.exception.ResourceNotFoundException;
 import by.iba.exception.ServiceException;
 import by.iba.repository.RoleRepository;
 import by.iba.repository.UserRepository;
 import by.iba.security.domain.UserDetailsImpl;
-import by.iba.security.dto.JwtResp;
-import by.iba.security.dto.SignInReq;
-import by.iba.security.dto.SignUpReq;
+import by.iba.security.dto.resp.JwtResp;
+import by.iba.security.dto.req.SignInReq;
+import by.iba.security.dto.req.SignUpReq;
 import by.iba.security.exception.WrongPassword;
 import by.iba.security.jwt.JwtUtils;
 import by.iba.service.UserService;
@@ -86,10 +85,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encoder.encode(signUpReq.getPassword()));
         user.setFirstName(signUpReq.getFirstName());
         user.setLastName(signUpReq.getLastName());
-        user.setImageUrl(signUpReq.getImageUrl());
-        user.setUserAccountStatus(UserAccountStatus.ACTIVE);
 
-        Role userRole = roleRepository.getByTypeOfRole(RoleType.USER)
+        Role userRole = roleRepository.getByRoleType(RoleType.USER)
                 .orElseThrow(() -> new ResourceNotFoundException("Role is not found!"));
 
         user.setRoles(Collections.singleton(userRole));
@@ -128,7 +125,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encoder.encode(updateDto.getPassword()));
         user.setFirstName(updateDto.getFirstName());
         user.setLastName(updateDto.getLastName());
-        user.setImageUrl(updateDto.getImageUrl());
         log.info("IN method update - updated user : {}", user);
 
         userRepository.save(user);

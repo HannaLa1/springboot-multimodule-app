@@ -1,6 +1,6 @@
 package by.iba.service.impl;
 
-import by.iba.dto.ResetDto;
+import by.iba.dto.req.ResetDto;
 import by.iba.entity.customer.User;
 import by.iba.exception.ResourceNotFoundException;
 import by.iba.exception.ServiceException;

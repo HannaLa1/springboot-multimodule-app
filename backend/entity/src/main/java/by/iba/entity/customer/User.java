@@ -1,6 +1,7 @@
 package by.iba.entity.customer;
 
 import by.iba.entity.FullAbstractEntity;
+import by.iba.entity.sparepart.Image;
 import lombok.*;
 
 import javax.persistence.*;
@@ -54,7 +55,10 @@ public class User extends FullAbstractEntity {
     @Column(name = "last_Visited_Date")
     private LocalDateTime lastVisitedDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_account_status")
-    private UserAccountStatus userAccountStatus;
+    @Column(name = "account_status", nullable = false)
+    @Enumerated
+    private AccountStatus accountStatus = AccountStatus.PENDING;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Image image;
 }

@@ -2,7 +2,7 @@ package by.iba.security.service;
 
 import by.iba.entity.customer.User;
 import by.iba.repository.UserRepository;
-import by.iba.entity.customer.UserAccountStatus;
+import by.iba.entity.customer.AccountStatus;
 import by.iba.security.domain.UserDetailsImpl;
 import by.iba.security.exception.BannedUserException;
 import lombok.AllArgsConstructor;
@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         log.info("In method loadUserByUsername - user with username: {} successfully loaded", email);
 
-        if(user.getUserAccountStatus().equals(UserAccountStatus.BANNED)){
+        if(user.getUserAccountStatus().equals(AccountStatus.BANNED)){
             throw new BannedUserException("User is banned!");
         }
 

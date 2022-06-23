@@ -14,6 +14,6 @@ import javax.persistence.*;
 public class Role extends AbstractBaseEntity {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type_of_role", nullable = false, unique = true)
+    @Column(name = "role_type", nullable = false, unique = true)
     private RoleType roleType;
 }

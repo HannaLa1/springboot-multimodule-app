@@ -1,12 +1,12 @@
-package by.iba.dto;
+package by.iba.dto.resp;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import by.iba.dto.AbstractDto;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SparePartDto extends AbstractDto {

@@ -1,58 +1,62 @@
 package by.iba.rest;
 
-import by.iba.dto.ModificationRoleDto;
-import by.iba.dto.UserSearchCriteriaDto;
 import by.iba.dto.page.PageWrapper;
-import by.iba.dto.UserDto;
-import by.iba.dto.page.Paging;
-import by.iba.service.AdminService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+import by.iba.dto.req.ModificationRoleDto;
+import by.iba.dto.resp.SellerDto;
+import by.iba.dto.resp.SparePartDto;
+import by.iba.dto.resp.UserDto;
+import by.iba.dto.seacrhcriteria.SellerSearchCriteria;
+import by.iba.dto.seacrhcriteria.SparePartSearchCriteria;
+import by.iba.dto.seacrhcriteria.UserSearchCriteria;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 
-@RestController
-@AllArgsConstructor
-@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/api/v1/admins/users")
-public class AdminController {
-
-    private final AdminService service;
+@PreAuthorize("hasAuthority('ADMIN')")
+public interface AdminController {
 
     @GetMapping
-    public ResponseEntity<PageWrapper<UserDto>> findAll(@RequestParam(defaultValue = "10", value = "size")
-                                                     @Min(value = 1, message = "Min size value is 1!") Integer size,
-                                                        @RequestParam(defaultValue = "0", value = "page")
-                                                        @Min(value = 1, message = "Min page value is 1!") Integer page,
-                                                        @Valid @RequestBody UserSearchCriteriaDto criteriaDto) {
-        Paging paging = new Paging(page, size);
-        PageWrapper<UserDto> userDTOList = service.findAll(criteriaDto, paging);
+    ResponseEntity<PageWrapper<UserDto>> findAllUsers(@RequestParam(defaultValue = "0", required = false) final Integer page,
+                                                      @RequestParam(defaultValue = "10", required = false) final Integer size,
+                                                      @Valid @RequestBody UserSearchCriteria searchCriteria);
 
-        return new ResponseEntity<>(userDTOList, HttpStatus.OK);
-    }
+    @GetMapping
+    ResponseEntity<PageWrapper<SellerDto>> findAllSellers(@RequestParam(defaultValue = "0", required = false) final Integer page,
+                                                          @RequestParam(defaultValue = "10", required = false) final Integer size,
+                                                          @Valid @RequestBody SellerSearchCriteria searchCriteria);
+
+    @GetMapping
+    ResponseEntity<PageWrapper<SparePartDto>> findAllSpareParts(@RequestParam(defaultValue = "0", required = false) final Integer page,
+                                                                @RequestParam(defaultValue = "10", required = false) final Integer size,
+                                                                @Valid @RequestBody SparePartSearchCriteria searchCriteria);
 
     @PutMapping("/{id}/change-role")
-    public ResponseEntity<UserDto> changeRole(@PathVariable("id") Long id, @Valid @RequestBody ModificationRoleDto roleDto) {
-        UserDto userDTO = service.changeRole(id, roleDto.getRoleId());
+    ResponseEntity<UserDto> changeRole(@PathVariable Long id, @Valid @RequestBody ModificationRoleDto roleDto);
 
-        return new ResponseEntity<>(userDTO, HttpStatus.OK);
-    }
+    @PutMapping("/{userId}/ban")
+    ResponseEntity<UserDto> bannedUser(@PathVariable("userId") Long userId);
 
-    @PutMapping("/{id}/ban")
-    public ResponseEntity<UserDto> bannedUser(@PathVariable ("id") Long id) {
-        UserDto userDTO = service.bannedUser(id);
+    @PutMapping("/{userId}/unban")
+    ResponseEntity<UserDto> unBannedUser(@PathVariable("userId") Long userId);
 
-        return new ResponseEntity<>(userDTO, HttpStatus.OK);
-    }
+    @PutMapping("/{sellerId}/ban")
+    ResponseEntity<SellerDto> bannedSeller(@PathVariable("sellerId") Long sellerId);
 
-    @PutMapping("/{id}/unban")
-    public ResponseEntity<UserDto> unBannedUser(@PathVariable ("id") Long id) {
-        UserDto userDTO = service.unBannedUser(id);
+    @PutMapping("/{sellerId}/unban")
+    ResponseEntity<SellerDto> unBannedSeller(@PathVariable("sellerId") Long sellerId);
 
-        return new ResponseEntity<>(userDTO, HttpStatus.OK);
-    }
+    @GetMapping("/{userId}")
+    ResponseEntity<UserDto> findUserById(@PathVariable("userId") Long userId);
+
+    @GetMapping("/{sellerId}")
+    ResponseEntity<SellerDto> findSellerById(@PathVariable("sellerId") Long sellerId);
+
+    @DeleteMapping("/{userId}/image")
+    ResponseEntity<UserDto> deleteUserImage(@PathVariable("userId") Long userId);
+
+    @DeleteMapping("/{sellerId}/image")
+    ResponseEntity<SellerDto> deleteSellerImage(@PathVariable("sellerId") Long sellerId);
 }

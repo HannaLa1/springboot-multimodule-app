@@ -27,7 +27,6 @@ public class PurchaseHistory extends AbstractBaseEntity {
     @Column(name = "date_of_purchase", nullable = false)
     private LocalDateTime dateOfPurchase;
 
-    @Column(name = "date_of_purchase", nullable = false)
     @OneToOne(fetch = FetchType.LAZY)
     private Price price;
 

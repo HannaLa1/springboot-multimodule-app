@@ -1,11 +1,11 @@
 package by.iba.service;
 
-import by.iba.dto.ModificationRoleDto;
-import by.iba.dto.UpdateDto;
-import by.iba.dto.UserDto;
-import by.iba.security.dto.JwtResp;
-import by.iba.security.dto.SignInReq;
-import by.iba.security.dto.SignUpReq;
+import by.iba.dto.req.ModificationRoleDto;
+import by.iba.dto.req.UpdateDto;
+import by.iba.dto.resp.UserDto;
+import by.iba.security.dto.resp.JwtResp;
+import by.iba.security.dto.req.SignInReq;
+import by.iba.security.dto.req.SignUpReq;
 
 public interface UserService {
     UserDto addRole(Long id, ModificationRoleDto modificationRoleDto);

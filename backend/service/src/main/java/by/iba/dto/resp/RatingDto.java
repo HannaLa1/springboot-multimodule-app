@@ -1,16 +1,16 @@
-package by.iba.dto;
+package by.iba.dto.resp;
 
-import by.iba.entity.customer.User;
+import by.iba.dto.AbstractDto;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RatingDto extends AbstractDto {
 
-    private double rating;
-
-    private User user;
+    private Integer rating;
 }

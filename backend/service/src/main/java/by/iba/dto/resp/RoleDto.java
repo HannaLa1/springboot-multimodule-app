@@ -1,11 +1,11 @@
-package by.iba.dto;
+package by.iba.dto.resp;
 
+import by.iba.dto.AbstractDto;
 import by.iba.entity.customer.RoleType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoleDto extends AbstractDto {
